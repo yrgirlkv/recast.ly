@@ -8,17 +8,22 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      currentIndex: 0,
+      currentVideo: exampleVideoData[0],
     };
 
-    this.state.current = () => { exampleVideoData[this.state.currentIndex].id.videoId; },
-    this.state.list = exampleVideoData.filter(eachVideo => eachVideo.id.videoId !== this.current);
+    // this.state.current = () => { exampleVideoData[this.state.currentIndex].id.videoId; },
+    // this.state.list = exampleVideoData.filter(eachVideo => eachVideo.id.videoId !== this.current);
     //click function that changes current to videoId of clicked thing
 
   }
 
+  clickHandler (e) {
+    this.setState({
+      currentVideo: e
+    });
+  }
+
   render () {
-    console.log(this.state.list);
     return (
       <div>
         <nav className="navbar">
@@ -28,11 +33,10 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            {}
-            <VideoPlayer video = {exampleVideoData[this.state.currentIndex]} />
+            <VideoPlayer video = {this.state.currentVideo} />
           </div>
           <div className="col-md-5">
-            <VideoList videos = {this.state.list}/>
+            <VideoList clickHandler = {this.clickHandler.bind(this)} videos = {exampleVideoData}/>
           </div>
         </div>
       </div>);
